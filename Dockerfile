@@ -1,5 +1,7 @@
-FROM amazoncorretto:21
-##FROM amazoncorretto:8
+FROM amazoncorretto:23
+#FROM amazoncorretto:23   not LTS
+#FROM amazoncorretto:21   centos fedora amz linux 2, python 3.7.16 still. openjdk 21.0 LTS
+##FROM amazoncorretto:8   centos fedora amz linux 2, python 3.7.16
 MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
 
 
