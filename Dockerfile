@@ -6,8 +6,10 @@
 ## package req per https://snp-pipeline.readthedocs.io/en/latest/installation.html
 
 ##FROM debian:stretch
-FROM debian:bullseye
-# ie Debian 11
+#FROM debian:bullseye  11 old old stable
+#FROM debian:bookworm  12     old stable
+#FROM debian:trixie    13 current stable
+FROM debian:trixie
 
 
 ## unofficial containerazation of FDA's CFSAN SNP Pipeline
@@ -29,12 +31,31 @@ RUN echo  ''  ;\
     echo "" 
 
 
-RUN apt-get update -qq; \
+RUN echo  ''  ;\
+    touch _TOP_DIR_OF_CONTAINER_  ;\
+    echo "This container build as os, then add additional package via standalone shell script " | tee -a _TOP_DIR_OF_CONTAINER_  ;\
+    export TERM=dumb      ;\
+    export NO_COLOR=TRUE  ;\
+    apt-get update ;\
+    apt-get -y --quiet install git git-all file wget curl gzip bash zsh fish tcsh less vim procps screen tmux ;\
+    apt-get -y --quiet install apt-file ;\
+    cd /    ;\
+    echo ""
+
+# bulleye don't have htop, btop, usbtop that ubuntu does
+# actualy have htop
+# tabix need trixie (ver 13, current stable).  should have just named this branch deb rather than deb11... change tbd
+# top is from init-system-helpers
+
+RUN echo  ''  ;\
+    touch _TOP_DIR_OF_CONTAINER_  ;\
+    export TERM=dumb      ;\
+    export NO_COLOR=TRUE  ;\
+    apt-get update -qq; \
     apt-get install -y -qq git \
     apt-utils \
     wget \
-    htop \
-    usbtop \
+    init-system-helpers \
     python3-pip \
     python3-dev \
     bowtie2 \
