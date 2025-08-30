@@ -75,12 +75,13 @@ RUN echo  ''  ;\
     #++ rm -rf /var/cache/apt/* /var/lib/apt/lists/*;
 
 # non-free
+#    varscan \
 RUN echo  ''  ;\
     touch _TOP_DIR_OF_CONTAINER_  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
     apt-get install -y -q \
-    varscan \
+    xterm \
     ;
 
 
