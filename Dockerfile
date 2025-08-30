@@ -69,13 +69,15 @@ RUN wget https://bootstrap.pypa.io/get-pip.py -q \
 #install VARSCAN, ART, SRA Toolkit, GATK, Picard
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v$VARSCAN_VER.jar -q \
 	&& cp VarScan.v$VARSCAN_VER.jar /usr/bin/VarScan.jar 
-RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
+#RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
+##       VVV--- 404, not found.  deb can just apt get this rather than trace what's the new filename for wget...
+#+ RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz  \
 #+ 	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
 # 	&& cd /tmp/art_src_ChocolateCherryCake_Linux \
 # 	&& ./configure \
 # 	&& make \
 # 	&& make install \
- 	&& cd /tmp/ 
+# 	&& cd /tmp/ 
 RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/$SRATOOLKIT_VER/sratoolkit.$SRATOOLKIT_VER-ubuntu64.tar.gz -q \
 	&& tar -zxf /tmp/sratoolkit.$SRATOOLKIT_VER-ubuntu64.tar.gz \
 	&& cp /tmp/sratoolkit.$SRATOOLKIT_VER-ubuntu64/bin/fastq-dump.$SRATOOLKIT_VER /usr/bin/fastq-dump 
