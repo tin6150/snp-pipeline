@@ -3,6 +3,12 @@ MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
 
 
 WORKDIR /tmp/
+
+#sn50
+RUN yum update
+RUN yum install epel
+RUN yum install python3.11 python3-devel 
+
 RUN yum groupinstall -y 'Development Tools' \
 	&& yum install -y \
 		bzip2-devel \
@@ -11,8 +17,6 @@ RUN yum groupinstall -y 'Development Tools' \
 		hostname \
 		make \
 		ncurses-devel \
-		python3.11 \
-		python3-devel \
 		tar \
 		wget \
 		which \
