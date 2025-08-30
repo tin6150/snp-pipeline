@@ -62,20 +62,20 @@ RUN wget https://github.com/samtools/samtools/releases/download/$SAMTOOLS_VER/sa
 RUN wget https://github.com/samtools/bcftools/releases/download/$BCFTOOLS_VER/bcftools-$BCFTOOLS_VER.tar.bz2 -qO 	- | tar xj && (cd bcftools-$BCFTOOLS_VER && make && make install && cd /tmp)
 
 #install varscan, art and sra
-##RUN wget https://bootstrap.pypa.io/get-pip.py -q \
-##	&& python3 get-pip.py
-## ^^ complain python3.7 does not meet min req of python3.9   ++sn50
+RUN wget https://bootstrap.pypa.io/get-pip.py -q \
+	&& python3 get-pip.py
+## ^^ in corretto9 or 21: complain python3.7 does not meet min req of python3.9   ++sn50
 
 #install VARSCAN, ART, SRA Toolkit, GATK, Picard
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v$VARSCAN_VER.jar -q \
 	&& cp VarScan.v$VARSCAN_VER.jar /usr/bin/VarScan.jar 
-# RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
-# 	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
+RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
+#+ 	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
 # 	&& cd /tmp/art_src_ChocolateCherryCake_Linux \
 # 	&& ./configure \
 # 	&& make \
 # 	&& make install \
-# 	&& cd /tmp/ 
+ 	&& cd /tmp/ 
 RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/$SRATOOLKIT_VER/sratoolkit.$SRATOOLKIT_VER-ubuntu64.tar.gz -q \
 	&& tar -zxf /tmp/sratoolkit.$SRATOOLKIT_VER-ubuntu64.tar.gz \
 	&& cp /tmp/sratoolkit.$SRATOOLKIT_VER-ubuntu64/bin/fastq-dump.$SRATOOLKIT_VER /usr/bin/fastq-dump 
