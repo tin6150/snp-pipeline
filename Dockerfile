@@ -80,10 +80,10 @@ RUN wget https://github.com/broadinstitute/picard/releases/download/$PICARD_VER/
 	&& cp picard.jar /usr/bin/picard.jar
 
 #install snp-pipeline and snp-mutator	
-RUN pip install numpy biopython snp-mutator
+#++ RUN pip install numpy biopython snp-mutator #sn50
 WORKDIR /src/
 COPY ./ /src/ 
-RUN pip install .
+#++ RUN pip install .
 
 ENV PATH "$PATH:/tmp/samtools-$SAMTOOLS_VER/bin:/tmp/bcftools-$BCFTOOLS_VER/bin:/tmp/bowtie2-$BOWTIE2_VER/bin"
 ENV CLASSPATH "/usr/bin/VarScan.jar:/usr/bin/picard.jar:/usr/bin/GenomeAnalysisTK.jar"
