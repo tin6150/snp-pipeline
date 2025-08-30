@@ -21,3 +21,8 @@ singularity pull --name snp-pipeline.sif  docker://ghcr.io/tin6150/snp-pipeline:
 
 
 2025.0830
+
+
+rocky:9
+on the sn50 branch, that version of github/workflow yaml need to have the clause to build on this branch, not (only) in the master branch.   when in doubt, change both places, but nice if know if don't need multiple versions.
+
