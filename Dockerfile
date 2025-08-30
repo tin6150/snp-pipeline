@@ -51,8 +51,9 @@ RUN echo  ''  ;\
     touch _TOP_DIR_OF_CONTAINER_  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
-    apt-get install -y -q \
+    apt-get install -y -qq \
     python3-pip \
+    python3-full \
     python3-dev \
     ;
 
@@ -60,7 +61,7 @@ RUN echo  ''  ;\
     touch _TOP_DIR_OF_CONTAINER_  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
-    apt-get install -y -q \
+    apt-get install -y -qq \
     init-system-helpers \
     gnu-which \
     htop \
@@ -155,7 +156,7 @@ WORKDIR /test/
 
 #Sn50
 
-ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50 gnu-which no varscan"
+ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50 gnu-which no_varscan python3-full"
 ENV DBG_DOCKERFILE Dockerfile
 
 RUN  cd / \
