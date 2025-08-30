@@ -76,8 +76,9 @@ RUN wget https://github.com/samtools/bcftools/releases/download/$BCFTOOLS_VER/bc
 #	&& python3 get-pip.py
 ## ^^ complain python3.7 does not meet min req of python3.9   ++sn50
 ##sn50
-RUN yum install python3-pip
-RUN ln -s /usr/bin/pip3 /usr/bin/pip 
+#// RUN yum install python3-pip
+#   already have pip and sym link, so should be able to skip this altogether
+#-- RUN ln -s /usr/bin/pip3 /usr/bin/pip   # 
 
 #install VARSCAN, ART, SRA Toolkit, GATK, Picard
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v$VARSCAN_VER.jar -q \
