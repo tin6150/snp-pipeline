@@ -136,7 +136,20 @@ WORKDIR /workdir
 
 
 #install snp-pipeline and snp-mutator
-RUN pip install numpy biopython snp-mutator 
+#~RUN pip install numpy biopython snp-mutator 
+# deb complain , forcing use of apt install python-[PKG]
+RUN echo  ''  ;\
+    touch _TOP_DIR_OF_CONTAINER_  ;\
+    export TERM=dumb      ;\
+    export NO_COLOR=TRUE  ;\
+    apt-get install -y -q \
+    python3-numpy \
+    python3-biopython \
+    ;
+# deb 13 don't have pkg for snp-mutator or snp-pipeline
+# couldn't get the varscan installed above
+# so abandoning this, esp now that master:Dockerfile works.
+
 
 WORKDIR /src/
 COPY ./ /src/
@@ -161,7 +174,7 @@ WORKDIR /test/
 
 #Sn50
 
-ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50 gnu-which no_varscan python3-full"
+ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50  no varscan , no pkg for snp-... "
 ENV DBG_DOCKERFILE Dockerfile
 
 RUN  cd / \

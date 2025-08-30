@@ -30,18 +30,40 @@ Dev notes and branches
 ----------------------
 
 master
+=======
+
 	maybe working with corretto:23 (latest, but non LTS).
 
 
 rocky:9
+=======
+
 on the sn50 branch, that version of github/workflow yaml need to have the clause to build on this branch, not needed in  master branch (the generic version of the yaml would suffice).
 
 wget for VarScan got 404.   apparently that code was disabled since upstream.
 
 
 deb: 13
+=======
+
 forked to use debian 11 (bulleye, as that worked well before for other project).
 using the Dockerfile I wrote after all.
 changed to trixie, current stable (ie ver 13).
 pip3 install snp-pipeline return an error (can see it in wsl:deb)
 so skipping that and install from git repo instead.
+
+138 #install snp-pipeline and snp-mutator
+139 #~RUN pip install numpy biopython snp-mutator
+140 # deb complain , forcing use of apt install python-[PKG]
+141 RUN echo  ''  ;\
+142     touch _TOP_DIR_OF_CONTAINER_  ;\
+143     export TERM=dumb      ;\
+144     export NO_COLOR=TRUE  ;\
+145     apt-get install -y -q \
+146     python3-numpy \
+147     python3-biopython \
+148     ;
+149 # deb 13 don't have pkg for snp-mutator or snp-pipeline
+150 # couldn't get the varscan installed above
+151 # so abandoning this, esp now that master:Dockerfile works.
+
