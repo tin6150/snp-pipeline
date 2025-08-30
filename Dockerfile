@@ -93,7 +93,8 @@ RUN wget https://github.com/broadinstitute/picard/releases/download/$PICARD_VER/
 	&& cp picard.jar /usr/bin/picard.jar
 
 #install snp-pipeline and snp-mutator	
-#++ RUN pip install numpy biopython snp-mutator #sn50
+RUN pip install numpy biopython snp-mutator #sn50
+
 WORKDIR /src/
 COPY ./ /src/ 
 RUN pip install .
@@ -105,13 +106,13 @@ ENV NUMCORES 4
 #Test snp_pipeline
 #++Sn50
 WORKDIR /test/
-#RUN cfsan_snp_pipeline data lambdaVirusInputs testLambdaVirus \
-	#&& cd testLambdaVirus \
-	#&& cfsan_snp_pipeline run -s samples reference/lambda_virus.fasta \
-	#&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
-	#&& diff -q snplist.txt expectedResults/snplist.txt \
-	#&& diff -q snpma.fasta expectedResults/snpma.fasta \
-	#&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
+RUN cfsan_snp_pipeline data lambdaVirusInputs testLambdaVirus \
+	&& cd testLambdaVirus \
+	&& cfsan_snp_pipeline run -s samples reference/lambda_virus.fasta \
+	&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
+	&& diff -q snplist.txt expectedResults/snplist.txt \
+	&& diff -q snpma.fasta expectedResults/snpma.fasta \
+	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
 	
 ENTRYPOINT ["run_snp_pipeline.sh"]
 CMD ["-h"]
