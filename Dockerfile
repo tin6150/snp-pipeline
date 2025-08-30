@@ -1,13 +1,9 @@
-FROM amazoncorretto:8
+FROM amazoncorretto:21
+##FROM amazoncorretto:8
 MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
 
 
 WORKDIR /tmp/
-
-#sn50
-RUN yum update
-RUN yum install epel
-RUN yum install python3.11 python3-devel 
 
 RUN yum groupinstall -y 'Development Tools' \
 	&& yum install -y \
@@ -25,6 +21,12 @@ RUN yum groupinstall -y 'Development Tools' \
 	&& yum clean all
 
 #		python3 \
+#sn50
+#RUN yum update
+#RUN yum install epel
+#RUN yum install python3.11 python3-devel 
+RUN yum install python3  python3-devel 
+
 
 WORKDIR /tmp/
 
