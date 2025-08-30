@@ -52,25 +52,37 @@ RUN echo  ''  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
     apt-get install -y -q \
-    apt-utils \
-    wget \
+    python3-pip \
+    python3-dev \
+    ;
+
+RUN echo  ''  ;\
+    touch _TOP_DIR_OF_CONTAINER_  ;\
+    export TERM=dumb      ;\
+    export NO_COLOR=TRUE  ;\
+    apt-get install -y -q \
     init-system-helpers \
     htop \
     btop \
-    python3-pip \
-    python3-dev \
     bowtie2 \
     smalt \
     smalt-examples \
     samtools samtools-test \
     picard picard-tools \
-    varscan \
     tabix \
     bcftools \
-    ; \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*;
+    ; 
+    #++ rm -rf /var/cache/apt/* /var/lib/apt/lists/*;
 
-#btop \
+# non-free
+RUN echo  ''  ;\
+    touch _TOP_DIR_OF_CONTAINER_  ;\
+    export TERM=dumb      ;\
+    export NO_COLOR=TRUE  ;\
+    apt-get install -y -q \
+    varscan \
+    ;
+
 
 ENV DEBIAN_FRONTEND Teletype
 
