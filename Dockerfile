@@ -52,8 +52,9 @@ RUN wget https://github.com/samtools/samtools/releases/download/$SAMTOOLS_VER/sa
 RUN wget https://github.com/samtools/bcftools/releases/download/$BCFTOOLS_VER/bcftools-$BCFTOOLS_VER.tar.bz2 -qO 	- | tar xj && (cd bcftools-$BCFTOOLS_VER && make && make install && cd /tmp)
 
 #install varscan, art and sra
-RUN wget https://bootstrap.pypa.io/get-pip.py -q \
-	&& python3 get-pip.py
+##RUN wget https://bootstrap.pypa.io/get-pip.py -q \
+##	&& python3 get-pip.py
+## ^^ complain python3.7 does not meet min req of python3.9   ++sn50
 
 #install VARSCAN, ART, SRA Toolkit, GATK, Picard
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v$VARSCAN_VER.jar -q \
