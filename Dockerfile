@@ -13,6 +13,8 @@ RUN yum groupinstall -y 'Development Tools' \
 		hostname \
 		make \
 		ncurses-devel \
+		python3 \
+		python3-devel \
 		tar \
 		wget \
 		which \
@@ -25,7 +27,7 @@ RUN yum groupinstall -y 'Development Tools' \
 #RUN yum update
 #RUN yum install epel
 #RUN yum install python3.11 python3-devel 
-RUN yum install python3  python3-devel 
+#RUN yum install python3  python3-devel 
 
 
 WORKDIR /tmp/
