@@ -53,7 +53,8 @@ RUN apt-get update -qq; \
 ENV DEBIAN_FRONTEND Teletype
 
 # Install python dependencies
-RUN pip3 install -U snp-pipeline;
+#++RUN pip3 install -U snp-pipeline;
+#Sn50 ^^ error... exit 127 
 
 #Sn50
 # Install GATK 
@@ -62,6 +63,7 @@ RUN cd /opt ;\
     wget -q -O gatk.zip https://github.com/broadinstitute/gatk/releases/download/4.6.2.0/gatk-4.6.2.0.zip ;\
     unzip gatk.zip ;\
     echo $? 
+
 
 # gatk-4.6.2.0.zip
 

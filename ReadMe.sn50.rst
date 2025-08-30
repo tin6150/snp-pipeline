@@ -26,3 +26,7 @@ singularity pull --name snp-pipeline.sif  docker://ghcr.io/tin6150/snp-pipeline:
 rocky:9
 on the sn50 branch, that version of github/workflow yaml need to have the clause to build on this branch, not (only) in the master branch.   when in doubt, change both places, but nice if know if don't need multiple versions.
 
+wget for VarScan got 404.
+forked to use debian 11 (bulleye, as that worked well before for other project).
+using the Dockerfile I wrote after all.
+
