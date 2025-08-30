@@ -23,10 +23,25 @@ singularity pull --name snp-pipeline.sif  docker://ghcr.io/tin6150/snp-pipeline:
 2025.0830
 
 
+
+
+
+Dev notes and branches
+----------------------
+
+master
+	maybe working with corretto:23 (latest, but non LTS).
+
+
 rocky:9
 on the sn50 branch, that version of github/workflow yaml need to have the clause to build on this branch, not needed in  master branch (the generic version of the yaml would suffice).
 
-wget for VarScan got 404.
+wget for VarScan got 404.   apparently that code was disabled since upstream.
+
+
+deb: 13
 forked to use debian 11 (bulleye, as that worked well before for other project).
 using the Dockerfile I wrote after all.
-
+changed to trixie, current stable (ie ver 13).
+pip3 install snp-pipeline return an error (can see it in wsl:deb)
+so skipping that and install from git repo instead.

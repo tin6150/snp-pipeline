@@ -89,10 +89,6 @@ RUN echo  ''  ;\
 
 ENV DEBIAN_FRONTEND Teletype
 
-# Install python dependencies
-RUN pip3 install -U snp-pipeline;
-#Sn50 ^^ error... exit 127 
-
 #Sn50
 # Install GATK 
 RUN cd /opt ;\
@@ -129,6 +125,15 @@ WORKDIR /workdir
 #export CLASSPATH=~/software/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar:$CLASSPATH
 
 #ENV CLASSPATH /opt/gatk/
+
+# Install python dependencies, this was from doc 
+# https://snp-pipeline.readthedocs.io/en/latest/installation.html#step-6-install-the-snp-pipeline-python-package
+#RUN pip3 install -U snp-pipeline;
+#Sn50 ^^ error... exit 127 
+# complain: This environment is externally managed
+# what is -U anyway?  --user or --upgrade?   not working without it anyway.
+# should be able to just install from the source code, master branch did this.
+
 
 #install snp-pipeline and snp-mutator
 RUN pip install numpy biopython snp-mutator 
