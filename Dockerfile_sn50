@@ -1,5 +1,10 @@
+
+## may not need.  they do have a Dockerfile in the main branch
+
 ##FROM debian:stretch
 FROM debian:bullseye
+
+
 
 ## unofficial containerazation of FDA's CFSAN SNP Pipeline
 ## install ref: https://snp-pipeline.readthedocs.io/en/latest/installation.html
