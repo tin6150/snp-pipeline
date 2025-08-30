@@ -36,9 +36,9 @@ RUN echo  ''  ;\
     echo "This container build as os, then add additional package via standalone shell script " | tee -a _TOP_DIR_OF_CONTAINER_  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
-    apt-get update ;\
+    apt-get update -qq    ;\
     apt-get -y --quiet install git git-all file wget curl gzip bash zsh fish tcsh less vim procps screen tmux ;\
-    apt-get -y --quiet install apt-file ;\
+    apt-get -y --quiet install apt-file apt-utils;\
     cd /    ;\
     echo ""
 
@@ -51,11 +51,12 @@ RUN echo  ''  ;\
     touch _TOP_DIR_OF_CONTAINER_  ;\
     export TERM=dumb      ;\
     export NO_COLOR=TRUE  ;\
-    apt-get update -qq; \
-    apt-get install -y -qq git \
+    apt-get install -y -q \
     apt-utils \
     wget \
     init-system-helpers \
+    htop \
+    btop \
     python3-pip \
     python3-dev \
     bowtie2 \
