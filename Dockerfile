@@ -62,6 +62,7 @@ RUN echo  ''  ;\
     export NO_COLOR=TRUE  ;\
     apt-get install -y -q \
     init-system-helpers \
+    gnu-which \
     htop \
     btop \
     bowtie2 \
@@ -88,7 +89,7 @@ RUN echo  ''  ;\
 ENV DEBIAN_FRONTEND Teletype
 
 # Install python dependencies
-#++RUN pip3 install -U snp-pipeline;
+RUN pip3 install -U snp-pipeline;
 #Sn50 ^^ error... exit 127 
 
 #Sn50
@@ -108,20 +109,6 @@ RUN cd /opt ;\
 
 
 
-#Sn50
-
-ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50"
-ENV DBG_DOCKERFILE Dockerfile
-
-RUN  cd / \
-  && touch _TOP_DIR_OF_CONTAINER_  \
-  && echo  "--------" >> _TOP_DIR_OF_CONTAINER_   \
-  && TZ=PST8PDT date  >> _TOP_DIR_OF_CONTAINER_   \
-  && uptime    | tee -a  _TOP_DIR_OF_CONTAINER_   \
-  && echo  $DBG_CONTAINER_VER   | tee -a  _TOP_DIR_OF_CONTAINER_   \
-  && echo  "Grand Finale for Dockerfile"
-
-
 
 ENV PATH $PATH:/usr/src
 # Setup .bashrc file for convenience during debugging
@@ -135,13 +122,56 @@ RUN echo "alias ls='ls -h --color=tty'\n"\
 WORKDIR /workdir
 
 
+
 #export CLASSPATH=~/software/varscan.v2.3.9/VarScan.jar:$CLASSPATH
 #export CLASSPATH=~/software/picard/picard.jar:$CLASSPATH
 #export CLASSPATH=~/software/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar:$CLASSPATH
 
 #ENV CLASSPATH /opt/gatk/
 
+#install snp-pipeline and snp-mutator
+RUN pip install numpy biopython snp-mutator 
+
+WORKDIR /src/
+COPY ./ /src/
+RUN pip install .
+
+ENV PATH "$PATH:/tmp/samtools-$SAMTOOLS_VER/bin:/tmp/bcftools-$BCFTOOLS_VER/bin:/tmp/bowtie2-$BOWTIE2_VER/bin"
+ENV CLASSPATH "/usr/bin/VarScan.jar:/usr/bin/picard.jar:/usr/bin/GenomeAnalysisTK.jar"
+ENV NUMCORES 4
+
+## from Dockerfile in master branch
+
+#Test snp_pipeline
+#++Sn50
+WORKDIR /test/
+#RUN cfsan_snp_pipeline data lambdaVirusInputs testLambdaVirus \
+        #&& cd testLambdaVirus \
+        #&& cfsan_snp_pipeline run -s samples reference/lambda_virus.fasta \
+        #&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
+        #&& diff -q snplist.txt expectedResults/snplist.txt \
+        #&& diff -q snpma.fasta expectedResults/snpma.fasta \
+        #&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
+
+#Sn50
+
+ENV DBG_CONTAINER_VER  "Dockerfile 2025.0830 sn50 gnu-which no varscan"
+ENV DBG_DOCKERFILE Dockerfile
+
+RUN  cd / \
+  && touch _TOP_DIR_OF_CONTAINER_  \
+  && echo  "--------" >> _TOP_DIR_OF_CONTAINER_   \
+  && TZ=PST8PDT date  >> _TOP_DIR_OF_CONTAINER_   \
+  && uptime    | tee -a  _TOP_DIR_OF_CONTAINER_   \
+  && echo  $DBG_CONTAINER_VER   | tee -a  _TOP_DIR_OF_CONTAINER_   \
+  && echo  "Grand Finale for Dockerfile"
+
+
+
+ENTRYPOINT ["run_snp_pipeline.sh"]
+CMD ["-h"]
+
 # Execute program when running the container
 #ENTRYPOINT ["python3", "/usr/src/cgMLST.py"]
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash"]
 
