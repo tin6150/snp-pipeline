@@ -71,8 +71,9 @@ RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v$VARSCAN_VER.
 	&& cp VarScan.v$VARSCAN_VER.jar /usr/bin/VarScan.jar 
 #RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
 ##       VVV--- 404, not found.  deb can just apt get this rather than trace what's the new filename for wget...
-#+ RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz  \
-#+ 	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
+##              oh it was already disabled upstream
+#  RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz  \
+# 	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
 # 	&& cd /tmp/art_src_ChocolateCherryCake_Linux \
 # 	&& ./configure \
 # 	&& make \
@@ -95,7 +96,7 @@ RUN wget https://github.com/broadinstitute/picard/releases/download/$PICARD_VER/
 #++ RUN pip install numpy biopython snp-mutator #sn50
 WORKDIR /src/
 COPY ./ /src/ 
-#++ RUN pip install .
+RUN pip install .
 
 ENV PATH "$PATH:/tmp/samtools-$SAMTOOLS_VER/bin:/tmp/bcftools-$BCFTOOLS_VER/bin:/tmp/bowtie2-$BOWTIE2_VER/bin"
 ENV CLASSPATH "/usr/bin/VarScan.jar:/usr/bin/picard.jar:/usr/bin/GenomeAnalysisTK.jar"
