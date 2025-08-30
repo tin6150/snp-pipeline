@@ -11,7 +11,7 @@ RUN yum groupinstall -y 'Development Tools' \
 		hostname \
 		make \
 		ncurses-devel \
-		python3 \
+		python3.11 \
 		python3-devel \
 		tar \
 		wget \
@@ -19,6 +19,8 @@ RUN yum groupinstall -y 'Development Tools' \
 		xz-devel \
 		zlib-devel \
 	&& yum clean all
+
+#		python3 \
 
 WORKDIR /tmp/
 
